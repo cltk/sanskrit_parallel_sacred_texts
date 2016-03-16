@@ -154,11 +154,11 @@ def bleu_score(script_to_use='nohup nice ~/mosesdecoder/bin/moses',filtered_mose
 	script_to_use_bleu='~/mosesdecoder/scripts/generic/multi-bleu.perl' ,input_test_file_lang2='~/corpus/newstest2011.true.en'):
 	subprocess.call(script_to_use+' -f '+filtered_moses_file+' '+input_test_file_lang1+' '+output_translated_file+' '+'2> ~/working/newstest2011.out ',shell=True)
 	subprocess.call(script_to_use_bleu+' -lc '+input_test_file_lang2+' '+output_translated_file,shell=True)
-'''
+
 #list of all the methods required to make a baseline moses model.
 corpus_preparation()
 tokenization()  
-#clone_git_repo("git clone https://github.com/coderbhupendra/cltk.git",'cltk')	  
+#clone_git_repo("git clone https://github.com/coderbhupendra/cltk.git",'repository')	  
 truecaser()
 truecasing()
 cleaning()
@@ -168,5 +168,4 @@ training_model()
 #similarly for tuning and training we can use above methods just by changing the default paramter values
 testing()
 bleu_score()
-'''
-clone_git_repo("git clone https://github.com/coderbhupendra/cltk.git",'repository')	  
+
