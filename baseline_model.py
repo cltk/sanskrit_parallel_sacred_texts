@@ -2,9 +2,9 @@ import subprocess
 from subprocess import call
 
 #python wrapper to clone any git repository , below is just an example to clone cltk repo 
-def clone_git_repo(url,dir='cltk'): 
-	subprocess.call('mkdir '+dir)
-	subprocess.call('cd '+dir +' \n '+ url,shell=True)
+def clone_git_repo(url,dir='repository'): 
+	subprocess.call('mkdir '+dir ,shell=True)
+	print subprocess.call('cd '+dir +' \n '+ url,shell=True)
 	
 
 def get_url_lastpart(url):
@@ -134,7 +134,7 @@ mkdir ~/working/binarised-model
 def binarizePrasetable_lexicalreordering(script_to_use_phrase='~/mosesdecoder/bin/processPhraseTableMin',script_to_use_lexical='~/mosesdecoder/bin/processLexicalTableMin',
 	working_dir_binarise='~/working/binarised-model',working_dir='~/working',input_phrase_table='train/model/phrase-table.gz',output_phrase_table='binarised-model/phrase-table',
 	input_lexical_table='train/model/reordering-table.wbe-msd-bidirectional',output_lexical_table='binarised-model/reordering-table'
-	nscores_count=4):
+	,nscores_count=4):
 	subprocess.call('mkdir '+working_dir_binarise,shell=True)
 	subprocess.call('cd '+working_dir+' \n '+script_to_use_phrase+' -in '+input_phrase_table +' -nscores '+str(nscores_count)+' -out '+output_phrase_table,shell=True)
 	subprocess.call('cd '+working_dir+' \n '+script_to_use_lexical+' -in '+input_lexical_table +' -out '+output_lexical_table,shell=True)
@@ -154,7 +154,7 @@ def bleu_score(script_to_use='nohup nice ~/mosesdecoder/bin/moses',filtered_mose
 	script_to_use_bleu='~/mosesdecoder/scripts/generic/multi-bleu.perl' ,input_test_file_lang2='~/corpus/newstest2011.true.en'):
 	subprocess.call(script_to_use+' -f '+filtered_moses_file+' '+input_test_file_lang1+' '+output_translated_file+' '+'2> ~/working/newstest2011.out ',shell=True)
 	subprocess.call(script_to_use_bleu+' -lc '+input_test_file_lang2+' '+output_translated_file,shell=True)
-
+'''
 #list of all the methods required to make a baseline moses model.
 corpus_preparation()
 tokenization()  
@@ -168,3 +168,5 @@ training_model()
 #similarly for tuning and training we can use above methods just by changing the default paramter values
 testing()
 bleu_score()
+'''
+clone_git_repo("git clone https://github.com/coderbhupendra/cltk.git",'repository')	  
