@@ -58,8 +58,8 @@ def scrap_doc(file_no):
 
 
 	#print s
-	s = s.replace(' ||', '#')
-	s = s.replace(' |', '#')
+	s = s.replace('||', '#')
+	s = s.replace('|', '#')
 
 	text=s.split('#')
 	#print len(text)
@@ -74,7 +74,7 @@ def scrap_doc(file_no):
 			no_sentences+=1
 
 #scrapping all the linking together
-for i in range (1190,1191):
+def sacred_texts():
 	url="http://sacred-texts.com/hin/rigveda/rvi01.htm"
 
 
@@ -90,3 +90,6 @@ for i in range (1190,1191):
 			c=c+1
 			print c
 			scrap_doc(link)
+
+if __name__ == "__main__":
+	sacred_texts()
