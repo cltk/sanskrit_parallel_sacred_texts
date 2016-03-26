@@ -1,4 +1,3 @@
-import subprocess
 from subprocess import call
 
 #python wrapper to clone any git repository , below is just an example to clone cltk repo 

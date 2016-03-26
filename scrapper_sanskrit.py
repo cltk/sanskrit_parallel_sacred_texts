@@ -13,10 +13,16 @@ def scrap_doc(file_no):
 	html = urllib.urlopen(urle)
 	soup = BeautifulSoup(html)
 
+	#to remove <a></a>
+	for a in soup.findAll('a'):
+		del a['href']
 
 	text = soup.find_all('p')[1]
 	text= text.encode('utf-8')
 	text= text.replace('<br/>', '#')
+
+	text = re.sub("(<[^>]+>)", '', text)
+
 	text= text[5:len(text)-4]
 
 	#replace every digit with space
