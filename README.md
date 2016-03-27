@@ -9,7 +9,8 @@ dataset: This folder contains the Scrapped text files.
 
 I have taken this documents from "Internet Scared Text Archive" under "Hinduism" section ,http://sacred-texts.com/hin/index.htm.
 
-License:
+#License
+
 Internet Sacred Text Archive Open Source License
 
 Preamble
