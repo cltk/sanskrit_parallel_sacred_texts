@@ -7,7 +7,7 @@ try:
 except ImportError:
 	from BeautifulSoup import BeautifulSoup
 
-def scrap_doc(file_no):	
+def scrap_doc(file_no,book_no):	
 	urls="http://sacred-texts.com/hin/rvsan/"+str(file_no)
 	urle="http://sacred-texts.com/hin/rigveda/"+str(file_no)
 
@@ -33,7 +33,7 @@ def scrap_doc(file_no):
 
 	#removing punctuation from strings , uncommenth this if you dont want to remove punctuation
 	regex = re.compile('[%s]' % re.escape(string.punctuation))
-	target_e = open("dataset/Rig_Veda/Rig_veda_"+str(file_no)+"_eng.txt", 'w')
+	target_e = open("dataset/Rig_Veda_"+str(book_no)+"/Rig_veda_"+str(file_no)+"_eng.txt", 'w')
 
 
 
@@ -72,7 +72,7 @@ def scrap_doc(file_no):
 	no_sentences_sanskrit= s.count('#')/2
 	text=s.split('#')
 	#print no_sentences_sanskrit
-	target_s = open("dataset/Rig_Veda/Rig_veda_"+str(file_no)+"_sans.txt", 'w')
+	target_s = open("dataset/Rig_Veda_"+str(book_no)+"/Rig_veda_"+str(file_no)+"_sans.txt", 'w')
 
 	flag=0  # flag to check if file should be deleted or not
 	for i in range(no_sentences_sanskrit):
@@ -96,16 +96,21 @@ def scrap_doc(file_no):
 		print "files not equal", file_no		
 
 		try:
-			os.remove("dataset/Rig_Veda/Rig_veda_"+str(file_no)+"_eng.txt")
-			os.remove("dataset/Rig_Veda/Rig_veda_"+str(file_no)+"_sans.txt")
+			os.remove("dataset/Rig_Veda_"+str(book_no)+"/Rig_veda_"+str(file_no)+"_eng.txt")
+			os.remove("dataset/Rig_Veda_"+str(book_no)+"/Rig_veda_"+str(file_no)+"_sans.txt")
 		except OSError:
 			pass		
 
 #scrapping all the linking together
-def sacred_texts():
-	url="http://sacred-texts.com/hin/rigveda/rvi01.htm"
+def scrap_each_book(book_link,book_no):
+	
+	url="http://sacred-texts.com/hin/rigveda/"+book_link+".htm"
+	
+	directory="dataset/Rig_Veda_"+str(book_no)
+	if not os.path.exists(directory):
+		os.makedirs(directory)
 
-
+	print url
 	html = urllib.urlopen(url)
 	soup = BeautifulSoup(html)
 
@@ -117,7 +122,15 @@ def sacred_texts():
 		if link!=None:
 			c=c+1
 			print c
-			scrap_doc(link)
+			scrap_doc(link,book_no)
+
+def scrap_rig_veda():
+	#scrapping all books one by book
+	for i in range (1,10): 
+		scrap_each_book('rvi0'+str(i),i)
+	scrap_each_book('rvi10',10)
+
+
 
 if __name__ == "__main__":
-	sacred_texts()
+	scrap_rig_veda()
