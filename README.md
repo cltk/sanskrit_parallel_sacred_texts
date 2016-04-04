@@ -11,4 +11,4 @@ These texts are from the [Internet Scared Text Archive](http://sacred-texts.com/
 
 # License
 
-Internet Sacred Text Archive Open Source License. See LICENSE`.
+Internet Sacred Text Archive Open Source License. See `LICENSE`.
